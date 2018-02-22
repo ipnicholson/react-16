@@ -34,8 +34,8 @@ class App extends Component {
       <div className="App">
         <UserInput
           style={userInputStyle}
-          username={this.state.users[0].username}
-          changed={this.inputChangeHandler}
+          currentName={this.state.users[0].username}
+          changed={this.inputChangeHandler} // This property can be named anything, as long as it is accessed by same name from child
         >
         </UserInput>
         <UserOutput
