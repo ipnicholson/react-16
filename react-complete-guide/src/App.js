@@ -42,20 +42,11 @@ class App extends Component {
     if ( this.state.showPersons ) {
       persons = (
         <div>
-          <Person
-            // Props are passed from here to the Person component
-            // Person doesn't have access to the state
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            changed={this.nameChangeHandler}
-            >My Hobbies: Racing
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age} />
+          {this.state.persons.map( person => {
+            return <Person
+              name={person.name}
+              age={person.age} />
+          })}
         </div>
       );
     }
@@ -69,13 +60,6 @@ class App extends Component {
           onClick={this.togglePersonsHandler}
           >Toggle Persons
         </button>
-        {/* this.state.persons.map(person => {
-          <Person
-            // Props are passed from here to the Person component
-            // Person doesn't have access to the state
-            name={person.name}
-            age={person.age} />
-        }); */}
         {persons}
       </div>
     );
