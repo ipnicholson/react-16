@@ -46,7 +46,8 @@ class App extends Component {
 
   render() {
     const buttonStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit', // will use surrounding font
       border: '1px solid blue',
       padding: '8px',
@@ -56,6 +57,12 @@ class App extends Component {
     let persons = null;
 
     if ( this.state.showPersons ) {
+
+      // Dynamic styling
+      buttonStyle.backgroundColor = 'red';
+      buttonStyle.color = 'black';
+
+      // Create list of Person components
       persons = (
         <div>
           {this.state.persons.map((person, index) => { // When using more than one arg in ES6 arrow functions, you must wrap them with ()
@@ -70,10 +77,17 @@ class App extends Component {
       );
     }
 
+
+    // Dynamic styling for <p> This is really working!
+    const classesArray = [];
+    if (this.state.persons.length <= 2) classesArray.push("red");
+    if (this.state.persons.length <= 1) classesArray.push("bold");
+    const classes = classesArray.join(' ');
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
+        <p className={classes}>This is really working!</p>
         <button
           style={buttonStyle}
           onClick={this.togglePersonsHandler}
