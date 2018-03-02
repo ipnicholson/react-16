@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Validation from './Validation/Validation.js'
+import Validation from './Validation/Validation'
+import Char from './Char/Char'
 
 class App extends Component {
 
@@ -14,7 +15,24 @@ class App extends Component {
     this.setState( {userInput: updatedValue} );
   }
 
+  deleteCharHandler = (charIndex) => {
+    const chars = [...this.state.userInput.split('')];
+    chars.splice(charIndex, 1);
+    const updatedChars = chars.join('');
+    this.setState( {userInput: updatedChars} );
+  }
+
   render() {
+
+    const CharList = this.state.userInput.split('').map((char, index) => {
+      return (
+        <Char
+          key={index}
+          character={char}
+          click={() => this.deleteCharHandler(index)} // anonymous function that holds a reference, we need to accept an index arg here
+        />
+      )
+    });
 
     return (
       <div className="App">
@@ -27,6 +45,7 @@ class App extends Component {
         <Validation
           textLength={this.state.userInput.length}
         />
+        {CharList}
       </div>
     );
   }
