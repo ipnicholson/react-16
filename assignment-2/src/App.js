@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
+import Validation from './Validation/Validation.js'
 
 class App extends Component {
 
   state = {
-    value: ''
+    userInput: ''
   }
 
   inputChangeHandler = (event) => {
     const updatedValue = event.target.value;
 
-    this.setState( {value: updatedValue} );
+    this.setState( {userInput: updatedValue} );
   }
 
   render() {
@@ -19,10 +20,13 @@ class App extends Component {
       <div className="App">
         <input
           type="text"
-          onChange={this.inputChangeHandler}
-          value={this.state.value}
+          onChange={(event) => this.inputChangeHandler(event)}
+          value={this.state.userInput}
+          />
+        <p>Length: {this.state.userInput.length}</p>
+        <Validation
+          textLength={this.state.userInput.length}
         />
-      <p>Length: {this.state.value.length}</p>
       </div>
     );
   }
