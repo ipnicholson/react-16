@@ -77,7 +77,6 @@ class App extends Component {
       );
     }
 
-
     // Dynamic styling for <p> This is really working!
     const classesArray = [];
     if (this.state.persons.length <= 2) classesArray.push("red");
