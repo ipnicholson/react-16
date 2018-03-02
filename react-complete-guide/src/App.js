@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -66,12 +67,15 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => { // When using more than one arg in ES6 arrow functions, you must wrap them with ()
-            return <Person
-              click={() => this.deletePersonHandler(index)} // execute as an arrow function, alternative is bind
-              name={person.name}
-              age={person.age}
-              changed={(event) => this.nameChangeHandler(event, person.id)}
-              key={person.id} />
+            return (
+              <ErrorBoundary key={person.id} >
+                <Person
+                  click={() => this.deletePersonHandler(index)} // execute as an arrow function, alternative is bind
+                  name={person.name}
+                  age={person.age}
+                  changed={(event) => this.nameChangeHandler(event, person.id)} />
+              </ErrorBoundary>
+            )
           })}
         </div>
       );
