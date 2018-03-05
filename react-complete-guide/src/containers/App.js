@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import PersonList from '../components/PersonList/PersonList'
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   state = {
@@ -37,52 +38,32 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    console.log('person clicked')
-    // const persons = this.state.persons.slice(); // slice is used to create a copy of persons instaed of a pointer (slice w/o args simply copies array)
     const persons = [...this.state.persons]; // Use ES6 spread operator to copy immutably
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
 
   render() {
-    const buttonStyle = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit', // will use surrounding font
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
 
     let persons = null;
 
     if ( this.state.showPersons ) {
       persons = (
-        <div>
-          <PersonList
-            persons = {this.state.persons}
-            click = {this.deletePersonHandler}
-            changed = {this.nameChangeHandler}
-          />
-        </div>
+        <PersonList
+          persons = {this.state.persons}
+          click = {this.deletePersonHandler}
+          changed = {this.nameChangeHandler}
+        />
       )
     }
 
-    // Dynamic styling for <p> This is really working!
-    const classesArray = [];
-    if (this.state.persons.length <= 2) classesArray.push("red");
-    if (this.state.persons.length <= 1) classesArray.push("bold");
-    const classes = classesArray.join(' ');
-
     return (
       <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p className={classes}>This is really working!</p>
-        <button
-          style={buttonStyle}
-          onClick={this.togglePersonsHandler}
-          >Toggle Persons
-        </button>
+        <Cockpit
+          showPersons = {this.state.showPersons}
+          persons = {this.state.persons}
+          click = {this.togglePersonsHandler}
+        />
         {persons}
       </div>
     );
