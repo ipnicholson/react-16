@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import PersonList from '../components/PersonList/PersonList'
 
 class App extends Component {
   state = {
@@ -57,24 +57,15 @@ class App extends Component {
     let persons = null;
 
     if ( this.state.showPersons ) {
-
-      // Dynamic styling
-      buttonStyle.backgroundColor = 'red';
-      buttonStyle.color = 'black';
-
-      // Create list of Person components
       persons = (
         <div>
-          {this.state.persons.map((person, index) => { // When using more than one arg in ES6 arrow functions, you must wrap them with ()
-            return <Person
-              click={() => this.deletePersonHandler(index)} // execute as an arrow function, alternative is bind
-              name={person.name}
-              age={person.age}
-              changed={(event) => this.nameChangeHandler(event, person.id)}
-              key={person.id} />
-          })}
+          <PersonList
+            persons = {this.state.persons}
+            click = {this.deletePersonHandler}
+            changed = {this.nameChangeHandler}
+          />
         </div>
-      );
+      )
     }
 
     // Dynamic styling for <p> This is really working!
