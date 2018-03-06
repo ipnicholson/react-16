@@ -4,6 +4,19 @@ import PersonList from '../components/PersonList/PersonList'
 import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
+  constructor(props) { // props can be accessed inside w/o this keyword
+    super(props); // required for extending from Component class
+    console.log('[App.js] inside constructor', props);
+  }
+
+  componentWillMount() {
+    console.log('[App.js] Inside componentWillMount()')
+  }
+
+  componentDidMount() {
+    console.log('[App.js] Inside componentDidMount()')
+  }
+
   state = {
     persons: [
       {id: '1', name: 'Ian', age: 99},
@@ -44,6 +57,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] Inside render()')
 
     let persons = null;
 

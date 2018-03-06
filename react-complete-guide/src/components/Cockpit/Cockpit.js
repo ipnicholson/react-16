@@ -1,7 +1,7 @@
 import React from 'react'
 import './Cockpit.css'
 
-const Cockpit = (props) => {
+const cockpit = (props) => {
   const buttonStyle = {
     backgroundColor: 'green',
     color: 'white',
@@ -19,15 +19,15 @@ const Cockpit = (props) => {
 
   return (
     <div>
-      <h1>Hi, I'm a React App</h1>
-      <p className={classes}>This is really working!</p>
+      <h1>{ props.appTitle }</h1>
+      <p className={ classes }>This is really working!</p>
       <button
-        style = {buttonStyle}
-        onClick = {props.click}
+        style = { buttonStyle }
+        onClick = { props.click }
         >Toggle Persons
       </button>
     </div>
   )
 }
 
-export default Cockpit
+export default cockpit
